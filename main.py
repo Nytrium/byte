@@ -10,17 +10,18 @@ with open('config.json', 'r') as f:
 
 client = commands.Bot(command_prefix=prefix, help_command=None)
 
-@client.command()
-async def on_ready():
-    print('Bot ready.')
-
 @client.command(name='load')
-async def _load(ctx, extension):
+async def _load(extension):
     client.load_extension(f'commands.{extension}')
 
 @client.command(name='unload')
-async def _unload(ctx, extension):
+async def _unload(extension):
     client.unload_extension(f'commands.{extension}')
+
+@client.command(name='reload')
+async def _reload(extension):
+    client.unload_extension(f'commands.{extension}')
+    client.load_extension(f'commands.{extension}')
 
 for fileName in os.listdir('./commands'):
     if fileName.endswith('.py'):
