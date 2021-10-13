@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from discord.ext.commands.errors import MissingPermissions
 
 class Moderation(commands.Cog):
 
@@ -30,6 +31,14 @@ class Moderation(commands.Cog):
 	async def _clear(self, ctx, amount=1):
 		await ctx.channel.purge(limit=amount+1)
 		await ctx.send(f'Successfully deleted {amount} messages!', delete_after=2)
+	#endregion
+
+	#region nick command
+	@commands.command(name='nick')
+	@commands.has_permissions(manage_nicknames=True)
+	async def _nick(self, ctx, user: discord.Member, *, nickname=None):
+		await user.edit(nick=nickname)
+		await ctx.send('Successfully changed nickname for ' + str(user.mention))
 	#endregion
 
 	#region user-info command
