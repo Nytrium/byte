@@ -1,7 +1,8 @@
 import discord
+from discord.ext import commands
+from discord_slash import SlashCommand
 import json
 import os
-from discord.ext import commands
 
 with open('config.json', 'r') as f:
     CONFIG = json.load(f)
@@ -9,6 +10,7 @@ with open('config.json', 'r') as f:
     prefix = CONFIG['prefix']
 
 client = commands.Bot(command_prefix=prefix, help_command=None)
+slash = SlashCommand(client, sync_commands=True)
 
 @client.command(name='load')
 async def _load(extension):

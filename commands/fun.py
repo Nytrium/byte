@@ -1,5 +1,7 @@
 import discord
+from discord import Embed
 from discord.ext import commands
+from discord_slash import cog_ext
 import random
 
 class Fun(commands.Cog):
@@ -12,14 +14,14 @@ class Fun(commands.Cog):
         print('Fun commands loaded.')
 
     #region say command
-    @commands.command(name='say')
-    async def _say(self, ctx, *, msg):
-        await ctx.send(msg)
+    @cog_ext.cog_slash(name='say', description='Make the bot say something!', guild_ids=[897602500440498218])
+    async def _say(self, ctx, *, message):
+        await ctx.send(message)
     #endregion
 
     #region 8ball command
-    @commands.command(name='8ball')
-    async def _8ball(self, ctx, *, args):
+    @cog_ext.cog_slash(name='8ball', description='Ask a question and see the possibilities of it happening!', guild_ids=[897602500440498218])
+    async def _8ball(self, ctx, *, question):
         answers = [
                 'It is certain.',
                 'It is decidedly so.',
@@ -45,6 +47,6 @@ class Fun(commands.Cog):
 
         await ctx.send(random.choice(answers))
     #endregion
-    
+
 def setup(client):
     client.add_cog(Fun(client))
