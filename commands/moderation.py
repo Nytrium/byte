@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-from discord.ext.commands.errors import MissingPermissions
 
 class Moderation(commands.Cog):
 
@@ -15,7 +14,10 @@ class Moderation(commands.Cog):
 	@commands.command(name='kick')
 	@commands.has_permissions(kick_members=True)
 	async def _kick(self, ctx, user: discord.Member, *, reason=None):
-		await user.kick(reason=reason)
+		if user == ctx.author:
+			await ctx.send('You can\'t kick yourself!')
+		else:
+			await user.kick(reason=reason)
 	#endregion
 
 	#region ban command
