@@ -28,12 +28,23 @@ class Moderation(commands.Cog):
 	@commands.command(name='user-info')
 	@commands.has_permissions()
 	async def _userinfo(self, ctx, user: discord.Member):
-		embed=discord.Embed(title="User Info", description=user, color=0x00ff00)
+		embed=discord.Embed(title="User Info", description=user, color=0x5555ff)
 		embed.set_thumbnail(url=user.avatar_url)
 		embed.add_field(name="Username", value=f'{user.name}#{user.discriminator}', inline=True)
 		embed.add_field(name="Joined Server At", value=str(user.joined_at)[:-10], inline=True)
 		embed.add_field(name="Joined Discord At", value=str(user.created_at)[:-10], inline=False)
 		embed.set_footer(text="Command run by " + str(ctx.author))
+		await ctx.send(embed=embed)
+
+	@commands.command(name='help')
+	@commands.has_permissions()
+	async def _help(self, ctx):
+		embed=discord.Embed(title="Help", description="List of Commands", color=0x00ff00)
+		embed.add_field(name="help", value="Bring up this embed.", inline=False)
+		embed.add_field(name="say", value="Make the bot say something!", inline=False)
+		embed.add_field(name="8ball", value="Say something and find out the possibilities of that happening!", inline=False)
+		embed.add_field(name="user-info", value="Get some information about a specific user.", inline=False)
+		
 		await ctx.send(embed=embed)
 
 def setup(client):
