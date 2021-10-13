@@ -11,10 +11,13 @@ class Fun(commands.Cog):
     async def on_ready(self):
         print('Fun commands loaded.')
 
+    #region say command
     @commands.command(name='say')
     async def _say(self, ctx, *, msg):
         await ctx.send(msg)
+    #endregion
 
+    #region 8ball command
     @commands.command(name='8ball')
     async def _8ball(self, ctx, *, args):
         answers = [
@@ -41,6 +44,7 @@ class Fun(commands.Cog):
                 ]
 
         await ctx.send(random.choice(answers))
-
+    #endregion
+    
 def setup(client):
     client.add_cog(Fun(client))
