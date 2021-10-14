@@ -1,5 +1,4 @@
 import discord
-from discord import Embed
 from discord.ext import commands
 from discord_slash import cog_ext
 import random
@@ -47,6 +46,15 @@ class Fun(commands.Cog):
 
         await ctx.send(random.choice(answers))
     #endregion
+
+    #region coinflip command
+    @cog_ext.cog_slash(name='coinflip', description='Flip a coin!', guild_ids=[897602500440498218])
+    async def _coinflip(self, ctx):
+        flip = random.randint(0,1)
+        if flip:
+            await ctx.send('It\'s heads!')
+        else:
+            await ctx.send('It\'s tails!')
 
 def setup(client):
     client.add_cog(Fun(client))
