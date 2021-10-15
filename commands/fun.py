@@ -1,4 +1,5 @@
 import discord
+from discord import message
 from discord.ext import commands
 from discord_slash import cog_ext
 import random
@@ -55,6 +56,14 @@ class Fun(commands.Cog):
             await ctx.send('It\'s heads!')
         else:
             await ctx.send('It\'s tails!')
+    #endregion
+
+    #region simp command
+    @cog_ext.cog_slash(name='simp', description='simp r8 machine', guild_ids=[897602500440498218])
+    async def _simp(self, ctx, user: discord.Member):
+        percent = random.randint(0, 100)
+        await ctx.send(f'{user.mention} is {percent}% simp!')
+    #endregion
 
 def setup(client):
     client.add_cog(Fun(client))
