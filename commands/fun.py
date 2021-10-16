@@ -65,5 +65,12 @@ class Fun(commands.Cog):
         await ctx.send(f'{user.mention} is {percent}% simp!')
     #endregion
 
+    #region thot command
+    @cog_ext.cog_slash(name='thot', description='thotties do be thotting', guild_ids=[897602500440498218])
+    async def _thot(self, ctx, user: discord.Member):
+        percent = random.randint(0, 100)
+        await ctx.send(f'{user.mention} is {percent}% thot!')
+    #endregion
+
 def setup(client):
     client.add_cog(Fun(client))
