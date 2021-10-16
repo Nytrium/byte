@@ -68,6 +68,9 @@ class Moderation(commands.Cog):
 		embed.add_field(name="help", value="Bring up this embed.", inline=False)
 		embed.add_field(name="say", value="Make the bot say something!", inline=False)
 		embed.add_field(name="8ball", value="Say something and find out the possibilities of that happening!", inline=False)
+		embed.add_field(name="thot", value="thot r8 machine", inline=False)
+		embed.add_field(name="simp", value="simp r8 machine", inline=False)
+		embed.add_field(name="coinflip", value="Flip a coin!", inline=False)
 		embed.add_field(name="user-info", value="Get some information about a specific user.", inline=False)
 		embed.add_field(name="clear", value="Clear a number of messages in a channel (default: 1)", inline=False)
 		
