@@ -12,7 +12,7 @@ class Moderation(commands.Cog):
 		print('Moderation commands loaded.')
 	
 	#region kick command
-	@cog_ext.cog_slash(name='kick', description='Kick a server member.', guild_ids=[897602500440498218])
+	@cog_ext.cog_slash(name='kick', description='Kick a server member.', guild_ids=[897602500440498218, 899316562014634075])
 	@commands.has_permissions(kick_members=True)
 	async def _kick(self, ctx, member: discord.Member, *, reason=None):
 		if member == ctx.author:
@@ -22,7 +22,7 @@ class Moderation(commands.Cog):
 	#endregion
 
 	#region ban command
-	@cog_ext.cog_slash(name='ban', description='Ban a server member.', guild_ids=[897602500440498218])
+	@cog_ext.cog_slash(name='ban', description='Ban a server member.', guild_ids=[897602500440498218, 899316562014634075])
 	@commands.has_permissions(ban_members=True)
 	async def _ban(self, ctx, member: discord.Member, *, reason=None):
 		if member == ctx.author:
@@ -32,7 +32,7 @@ class Moderation(commands.Cog):
 	#endregion
 
 	#region clear command
-	@cog_ext.cog_slash(name='clear', description='Clear an amount of messages from the current channel.', guild_ids=[897602500440498218])
+	@cog_ext.cog_slash(name='clear', description='Clear an amount of messages from the current channel.', guild_ids=[897602500440498218, 899316562014634075])
 	@commands.has_permissions(manage_messages=True)
 	async def _clear(self, ctx, amount=1):
 		await ctx.channel.purge(limit=int(amount)+1)
@@ -40,7 +40,7 @@ class Moderation(commands.Cog):
 	#endregion
 
 	#region nick command
-	@cog_ext.cog_slash(name='nick', description='Give a server member a new nickname.', guild_ids=[897602500440498218])
+	@cog_ext.cog_slash(name='nick', description='Give a server member a new nickname.', guild_ids=[897602500440498218, 899316562014634075])
 	@commands.has_permissions(manage_nicknames=True)
 	async def _nick(self, ctx, user: discord.Member, *, nickname):
 		await user.edit(nick=nickname)
@@ -48,7 +48,7 @@ class Moderation(commands.Cog):
 	#endregion
 
 	#region user-info command
-	@cog_ext.cog_slash(name='user-info', description='Get information on a server member.', guild_ids=[897602500440498218])
+	@cog_ext.cog_slash(name='user-info', description='Get information on a server member.', guild_ids=[897602500440498218, 899316562014634075])
 	@commands.has_permissions()
 	async def _userinfo(self, ctx, user: discord.Member):
 		embed=discord.Embed(title="User Info", description=user, color=0x5555ff)
@@ -61,7 +61,7 @@ class Moderation(commands.Cog):
 	#endregion
 
 	#region help command
-	@cog_ext.cog_slash(name='help', description='Get a list of bot commands.', guild_ids=[897602500440498218])
+	@cog_ext.cog_slash(name='help', description='Get a list of bot commands.', guild_ids=[897602500440498218, 899316562014634075])
 	@commands.has_permissions()
 	async def _help(self, ctx):
 		embed=discord.Embed(title="Help", description="List of Commands", color=0x00ff00)
