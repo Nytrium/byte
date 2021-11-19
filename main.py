@@ -1,6 +1,6 @@
 import discord # pip install discord.py
 from discord.ext import commands # pip install discord.py
-from discord_slash import SlashCommand # pip install pip install discord-py-slash-command
+from discord_slash import SlashCommand # pip install discord-py-slash-command
 import json
 import os
 
