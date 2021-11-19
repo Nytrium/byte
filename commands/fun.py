@@ -4,6 +4,8 @@ from discord.ext import commands
 from discord_slash import cog_ext
 import random
 
+guildIDs = [798236960677691432, 899316562014634075, 897602500440498218]
+
 class Fun(commands.Cog):
 
     def __init__(self, client):
@@ -14,13 +16,13 @@ class Fun(commands.Cog):
         print('Fun commands loaded.')
 
     #region say command
-    @cog_ext.cog_slash(name='say', description='Make the bot say something!', guild_ids=[897602500440498218, 899316562014634075])
+    @cog_ext.cog_slash(name='say', description='Make the bot say something!', guild_ids=guildIDs)
     async def _say(self, ctx, *, message):
         await ctx.send(message)
     #endregion
 
     #region 8ball command
-    @cog_ext.cog_slash(name='8ball', description='Ask a question and see the possibilities of it happening!', guild_ids=[897602500440498218, 899316562014634075])
+    @cog_ext.cog_slash(name='8ball', description='Ask a question and see the possibilities of it happening!', guild_ids=guildIDs)
     async def _8ball(self, ctx, *, question):
         answers = [
                 'It is certain.',
@@ -49,7 +51,7 @@ class Fun(commands.Cog):
     #endregion
 
     #region coinflip command
-    @cog_ext.cog_slash(name='coinflip', description='Flip a coin!', guild_ids=[897602500440498218, 899316562014634075])
+    @cog_ext.cog_slash(name='coinflip', description='Flip a coin!', guild_ids=guildIDs)
     async def _coinflip(self, ctx):
         flip = random.randint(0,1)
         if flip:
@@ -59,14 +61,14 @@ class Fun(commands.Cog):
     #endregion
 
     #region simp command
-    @cog_ext.cog_slash(name='simp', description='simp r8 machine', guild_ids=[897602500440498218, 899316562014634075])
+    @cog_ext.cog_slash(name='simp', description='simp r8 machine', guild_ids=guildIDs)
     async def _simp(self, ctx, user: discord.Member):
         percent = random.randint(0, 100)
         await ctx.send(f'{user.mention} is {percent}% simp!')
     #endregion
 
     #region thot command
-    @cog_ext.cog_slash(name='thot', description='thotties do be thotting', guild_ids=[897602500440498218, 899316562014634075])
+    @cog_ext.cog_slash(name='thot', description='thotties do be thotting', guild_ids=guildIDs)
     async def _thot(self, ctx, user: discord.Member):
         percent = random.randint(0, 100)
         await ctx.send(f'{user.mention} is {percent}% thot!')
