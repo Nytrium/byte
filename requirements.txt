@@ -1,6 +1,0 @@
-git+https://github.com/Rapptz/discord.py@rewrite
-discord-py-slash-command 
-PyNaCl==1.3.0
-pandas
-dnspython==1.16.0
-async.timeout==3.0.1
