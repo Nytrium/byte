@@ -1,7 +1,0 @@
-git+https://github.com/Rapptz/discord.py
-PyNaCl
-pandas
-dnspython
-async-timeout
-discord.py
-discord-py-slash-command
