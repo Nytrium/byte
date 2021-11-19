@@ -1,15 +1,14 @@
 import discord # pip install discord.py
 from discord.ext import commands # pip install discord.py
 from discord_slash import SlashCommand # pip install discord-py-slash-command
-import json
 import os
 
-with open('config.json', 'r') as f:
-    CONFIG = json.load(f)
-    prefix = CONFIG['prefix']
-
-client = commands.Bot(command_prefix=prefix, help_command=None)
+client = commands.Bot(command_prefix='/', help_command=None)
 slash = SlashCommand(client, sync_commands=True)
+
+@client.event
+async def on_readt(ctx):
+    print('Bot is ready!')
 
 @client.command(name='load')
 async def _load(extension):
