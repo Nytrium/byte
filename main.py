@@ -6,7 +6,6 @@ import os
 
 with open('config.json', 'r') as f:
     CONFIG = json.load(f)
-    TOKEN = CONFIG['TOKEN']
     prefix = CONFIG['prefix']
 
 client = commands.Bot(command_prefix=prefix, help_command=None)
@@ -29,4 +28,4 @@ for fileName in os.listdir('./commands'):
     if fileName.endswith('.py'):
         client.load_extension(f'commands.{fileName[:-3]}')
 
-client.run(TOKEN)
+client.run(os.environ['TOKEN'])
