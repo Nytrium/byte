@@ -1,5 +1,5 @@
 git+https://github.com/Rapptz/discord.py@rewrite
-discord-py-slash-command 
+git+https://github.com/goverfl0w/discord-interactions
 PyNaCl==1.3.0
 pandas
 dnspython==1.16.0
