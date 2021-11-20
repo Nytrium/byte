@@ -4,7 +4,7 @@ from discord.ext import commands
 from discord_slash import cog_ext
 import random
 
-guildIDs = [798236960677691432, 899316562014634075, 897602500440498218]
+guildIDs = [911595323363823676, 899316562014634075, 798236960677691432]
 
 class Fun(commands.Cog):
 
