@@ -81,9 +81,8 @@ class Fun(commands.Cog):
         name1 = user1.display_name.split()
         name2 = user2.display_name.split()
         
-        joinednames = name1 + name2
-        await ctx.send(f'{user1.mention} and {user2.mention} are {percent}% shippable!\nThey are {joinednames}!')
-
+        joinednames = str(name1[name1.length / 2]) + str(name2[name2.length / 2])
+        await ctx.send(f'{user1.mention} and {user2.mention} are {percent}% shippable!\nTheir ship name is {joinednames}!')
     #endregion
 
 def setup(client):
