@@ -115,6 +115,23 @@ class Moderation(commands.Cog):
 		if isinstance(error, commands.MissingPermissions):
 			await ctx.send('You don\'t have permission to mute members!')
 	#endregion
+ 
+	#region unmute command
+	@commands.has_permissions(manage_roles=True)
+	@cog_ext.cog_slash(name='unmute', description='Unmute a server member.', guild_ids=guildIDs)
+	async def _unmute(self, ctx, member: discord.Member):
+		if member == ctx.author:
+			await ctx.send('You can\'t unmute yourself!')
+		else:
+			role = discord.utils.get(ctx.guild.roles, name='Muted')
+			await member.remove_roles(role)
+			await ctx.send('Successfully unmuted ' + str(member.mention))
+   
+	@_unmute.error
+	async def unmute_error(self, ctx, error):
+		if isinstance(error, commands.MissingPermissions):
+			await ctx.send('You don\'t have permission to unmute members!')
+	#endregion
 
 def setup(client):
 	client.add_cog(Moderation(client))
