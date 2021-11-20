@@ -109,7 +109,12 @@ class Moderation(commands.Cog):
 			role = discord.utils.get(ctx.guild.roles, name='Muted')
 			await member.add_roles(role)
 			await ctx.send('Successfully muted ' + str(member.mention))
-   #endregion
+   
+	@_mute.error
+	async def mute_error(self, ctx, error):
+		if isinstance(error, commands.MissingPermissions):
+			await ctx.send('You don\'t have permission to mute members!')
+	#endregion
 
 def setup(client):
 	client.add_cog(Moderation(client))
