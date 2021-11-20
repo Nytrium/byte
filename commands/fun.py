@@ -82,11 +82,11 @@ class Fun(commands.Cog):
         user2 = list(user2.name)
         
         user1 = user1[:len(user1)//2]
-        for i in range(user1.length):
+        for i in range(len(user1)):
             user1split = user1split + user1[i]
         
         user2 = user2[len(user2)//2:]
-        for i in range(user2.length):
+        for i in range(len(user2)):
             user2split = user2split + user2[i]
         
         joined = user1split + user2split
