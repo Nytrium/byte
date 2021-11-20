@@ -2,11 +2,6 @@ import discord # pip install discord.py
 from discord.ext import commands # pip install discord.py
 from discord_slash import SlashCommand # pip install discord-py-slash-command
 import os
-import json
-
-with open('config.json', 'r') as f:
-    f = json.load(f)
-    TOKEN = f['TOKEN']
 
 client = commands.Bot(command_prefix='/', help_command=None, intents=discord.Intents.all())
 slash = SlashCommand(client, sync_commands=True)
@@ -32,4 +27,4 @@ for fileName in os.listdir('./commands'):
     if fileName.endswith('.py'):
         client.load_extension(f'commands.{fileName[:-3]}')
 
-client.run(TOKEN)
+client.run(os.environ['TOKEN'])
