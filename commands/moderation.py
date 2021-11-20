@@ -43,15 +43,15 @@ class Moderation(commands.Cog):
 			await ctx.send('You don\'t have permission to ban members!')
 	#endregion
 
-	#region clear command
+	#region purge command
 	@commands.has_permissions(manage_messages=True)
 	@cog_ext.cog_slash(name='clear', description='Clear an amount of messages from the current channel.', guild_ids=guildIDs)
-	async def _clear(self, ctx, amount=1):
+	async def _purge(self, ctx, amount=1):
 		await ctx.channel.purge(limit=int(amount)+1)
-		await ctx.send(f'Successfully deleted {amount} messages!', delete_after=2)
+		await ctx.send(f'Successfully purged {amount} messages!', delete_after=2)
 
-	@_clear.error
-	async def clear_error(self, ctx, error):
+	@_purge.error
+	async def purge_error(self, ctx, error):
 		if isinstance(error, commands.MissingPermissions):
 			await ctx.send('You don\'t have permission to clear messages!')
 	#endregion
@@ -131,6 +131,19 @@ class Moderation(commands.Cog):
 	async def unmute_error(self, ctx, error):
 		if isinstance(error, commands.MissingPermissions):
 			await ctx.send('You don\'t have permission to unmute members!')
+	#endregion
+ 
+	#region nuke command
+	@commands.has_permissions(manage_messages=True)
+	@cog_ext.cog_slash(name='nuke', description='Purge a whole channel worth of messages.', guild_ids=guildIDs)
+	async def _nuke(self, ctx, channel=discord.TextChannel):
+		channel.clone()
+		channel.delete()
+	
+	@_nuke.error
+	async def nuke_error(self, ctx, error):
+		if isinstance(error, commands.MissingPermissions):
+			await ctx.send('You don\'t have permission to purge messages!')
 	#endregion
 
 def setup(client):
