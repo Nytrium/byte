@@ -18,7 +18,7 @@ class Fun(commands.Cog):
     #region say command
     @cog_ext.cog_slash(name='say', description='Make the bot say something!', guild_ids=guildIDs)
     async def _say(self, ctx, *, message):
-        await ctx.send(message)
+        await ctx.send(f'>{ctx.author} says {message}')
     #endregion
 
     #region 8ball command
