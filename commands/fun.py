@@ -78,21 +78,7 @@ class Fun(commands.Cog):
     @cog_ext.cog_slash(name='ship', description='ship two people together', guild_ids=guildIDs)
     async def _ship(self, ctx, user1: discord.Member, user2: discord.Member):
         percent = random.randint(0, 100)
-        user1list = list(user1.name)
-        user2list = list(user2.name)
-        
-        user1list = user1list[:user1//2]
-        user1split = ''
-        for i in range(len(user1list)):
-            user1split = user1split + user1list[i]
-        
-        user2split = ''
-        user2list = user2list[user2list//2:]
-        for i in range(len(user2list)):
-            user2split = user2split + user2list[i]
-        
-        joined = user1split + user2split
-        await ctx.send(f'{user1.mention} and {user2.mention} are {percent}% shippable!\nTheir ship name is {joined}!')
+        await ctx.send(f'{user1.mention} and {user2.mention} are {percent}% shippable!')
     #endregion
 
 def setup(client):
