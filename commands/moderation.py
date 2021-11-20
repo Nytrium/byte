@@ -98,6 +98,18 @@ class Moderation(commands.Cog):
 		
 		await ctx.send(embed=embed)
 	#endregion
+ 
+	#region mute command
+	@commands.has_permissions(manage_roles=True)
+	@cog_ext.cog_slash(name='mute', description='Mute a server member.', guild_ids=guildIDs)
+	async def _mute(self, ctx, member: discord.Member):
+		if member == ctx.author:
+			await ctx.send('You can\'t mute yourself!')
+		else:
+			role = discord.utils.get(ctx.guild.roles, name='Muted')
+			await member.add_roles(role)
+			await ctx.send('Successfully muted ' + str(member.mention))
+   #endregion
 
 def setup(client):
 	client.add_cog(Moderation(client))
