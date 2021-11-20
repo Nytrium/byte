@@ -80,7 +80,7 @@ class Moderation(commands.Cog):
 	#endregion
 
 	#region mute command
-	@commands.has_permissions(manage_permissions=True, mute_members=True, manage_roles=True)
+	@commands.has_permissions(administrator=True, manage_permissions=True, mute_members=True, manage_roles=True)
 	@cog_ext.cog_slash(name='mute', description='Mute a server member.', guild_ids=guildIDs)
 	async def _mute(self, ctx, member: discord.Member):
 		print(member.roles)
