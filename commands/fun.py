@@ -24,7 +24,7 @@ class Fun(commands.Cog):
 	#region quote command
 	@cog_ext.cog_slash(name='quote', description='Quote a user!', guild_ids=guildIDs)
 	async def _quote(self, ctx, user: discord.Member, *, message):
-		await ctx.send(f'>{message}\n{user.mention}')
+		await ctx.send(f'> {message}\n{user.mention}')
 	#endregion
 
 	#region 8ball command
