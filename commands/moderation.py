@@ -134,7 +134,7 @@ class Moderation(commands.Cog):
 	#endregion
  
 	#region nuke command
-	@commands.has_permissions(manage_messages=True)
+	@commands.has_permissions(manage_messages=True, manage_channel=True)
 	@cog_ext.cog_slash(name='nuke', description='Purge a whole channel worth of messages.', guild_ids=guildIDs)
 	async def _nuke(self, ctx, channel=discord.TextChannel):
 		channel.clone()
