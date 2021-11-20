@@ -21,6 +21,11 @@ class Moderation(commands.Cog):
 			await ctx.send('You can\'t kick yourself!')
 		else:
 			await member.kick(reason=reason)
+   
+	@_kick.error
+	async def kick_error(self, ctx, error):
+		if isinstance(error, commands.MissingPermissions):
+			await ctx.send('You don\'t have permission to kick members!')
 	#endregion
 
 	#region ban command
@@ -31,6 +36,11 @@ class Moderation(commands.Cog):
 			await ctx.send('You can\'t ban yourself!')
 		else:
 			await member.ban(reason=reason)
+
+	@_ban.error
+	async def ban_error(self, ctx, error):
+		if isinstance(error, commands.MissingPermissions):
+			await ctx.send('You don\'t have permission to ban members!')
 	#endregion
 
 	#region clear command
@@ -39,6 +49,11 @@ class Moderation(commands.Cog):
 	async def _clear(self, ctx, amount=1):
 		await ctx.channel.purge(limit=int(amount)+1)
 		await ctx.send(f'Successfully deleted {amount} messages!', delete_after=2)
+
+	@_clear.error
+	async def clear_error(self, ctx, error):
+		if isinstance(error, commands.MissingPermissions):
+			await ctx.send('You don\'t have permission to clear messages!')
 	#endregion
 
 	#region nick command
@@ -47,6 +62,11 @@ class Moderation(commands.Cog):
 	async def _nick(self, ctx, user: discord.Member, *, nickname):
 		await user.edit(nick=nickname)
 		await ctx.send('Successfully changed nickname for ' + str(user.mention))
+
+	@_nick.error
+	async def nick_error(self, ctx, error):
+		if isinstance(error, commands.MissingPermissions):
+			await ctx.send('You don\'t have permission to change nicknames!')
 	#endregion
 
 	#region user-info command
