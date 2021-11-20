@@ -7,7 +7,7 @@ client = commands.Bot(command_prefix='/', help_command=None, intents=discord.Int
 slash = SlashCommand(client, sync_commands=True)
 
 @client.event
-async def on_ready(ctx):
+async def on_ready():
     print('Bot is ready!')
 
 @client.command(name='load')
