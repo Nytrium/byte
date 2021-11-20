@@ -21,6 +21,11 @@ class Fun(commands.Cog):
         await ctx.send(f'> {ctx.author.mention} says {message}')
     #endregion
 
+	#region quote command
+	@cog_ext.cog_slash(name='quote', description='Quote a user!', guild_ids=guildIDs)
+	async def _quote(self, ctx, user: discord.Member):
+		await ctx.send(f'>{ctx.message}\n - {user.mention}')
+
     #region 8ball command
     @cog_ext.cog_slash(name='8ball', description='Ask a question and see the possibilities of it happening!', guild_ids=guildIDs)
     async def _8ball(self, ctx, *, question):
@@ -79,6 +84,42 @@ class Fun(commands.Cog):
     async def _ship(self, ctx, user1: discord.Member, user2: discord.Member):
         percent = random.randint(0, 100)
         await ctx.send(f'{user1.mention} and {user2.mention} are {percent}% shippable!')
+    #endregion
+    
+    #region dank command
+    async def _dank(self, ctx, user: discord.Member):
+        percent = random.randint(0, 100)
+        await ctx.send(f'{user.mention} is {percent}% dank!')
+    #endregion
+
+	#region hug command
+    @cog_ext.cog_slash(name='hug', description='hug someone', guild_ids=guildIDs)
+    async def _hug(self, ctx, user: discord.Member):
+        await ctx.send(f'{ctx.author.mention} hugged {user.mention}! How cute!')
+    #endregion
+
+    #region slap command
+    @cog_ext.cog_slash(name='slap', description='slap someone', guild_ids=guildIDs)
+    async def _slap(self, ctx, user: discord.Member):
+        await ctx.send(f'{ctx.author.mention} slapped {user.mention}! Ouch!')
+    #endregion
+
+    #region pat command
+    @cog_ext.cog_slash(name='pat', description='pat someone', guild_ids=guildIDs)
+    async def _pat(self, ctx, user: discord.Member):
+        await ctx.send(f'{ctx.author.mention} patted {user.mention}!')
+    #endregion
+
+    #region kiss command
+    @cog_ext.cog_slash(name='kiss', description='kiss someone', guild_ids=guildIDs)
+    async def _kiss(self, ctx, user: discord.Member):
+        await ctx.send(f'{ctx.author.mention} kissed {user.mention}! Awww')
+    #endregion
+
+    #region poke command
+    @cog_ext.cog_slash(name='poke', description='poke someone', guild_ids=guildIDs)
+    async def _poke(self, ctx, user: discord.Member):
+        await ctx.send(f'{ctx.author.mention} poked {user.mention}!')
     #endregion
 
 def setup(client):
