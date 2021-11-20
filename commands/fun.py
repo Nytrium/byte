@@ -81,13 +81,13 @@ class Fun(commands.Cog):
         user1list = list(user1.name)
         user2list = list(user2.name)
         
-        user1list = user1list[:len(user1)//2]
+        user1list = user1list[:user1.list//2]
         user1split = ''
         for i in range(len(user1list)):
             user1split = user1split + user1list[i]
         
         user2split = ''
-        user2list = user2list[len(user2list)//2:]
+        user2list = user2list[user2list.list//2:]
         for i in range(len(user2list)):
             user2split = user2split + user2list[i]
         
