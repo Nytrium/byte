@@ -23,7 +23,7 @@ class Music(commands.Cog):
 	#region play command
 	@cog_ext.cog_slash(name='play', description='Play a song.', guild_ids=guildIDs)
 	async def _play(self, ctx, *, song):
-		await ctx.voice_client.play(discord.FFmpegPCMAudio(song), after=lambda e: print('Player error: %s' % e) if e else None)
+		await discord.VoiceClient.play(discord.FFmpegPCMAudio(song), after=lambda e: print('Player error: %s' % e) if e else None)
 		await ctx.send('Playing ' + song)
 		await ctx.voice_client.disconnect()
 		await ctx.send('Disconnected from voice channel.')
