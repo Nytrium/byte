@@ -49,7 +49,7 @@ class Music(commands.Cog):
 			await ctx.author.voice.channel.connect()
 			await ctx.send(f'Connected to {ctx.author.voice.channel.name}.')
 		
-		player = discord.VoiceClient.FFmpegAudio(url, after=lambda: print('done'))
+		player = discord.FFmpegAudio(url, after=lambda: print('done'))
 		player.start()
 		
 		await ctx.send(f'Playing {info["title"]}.')
