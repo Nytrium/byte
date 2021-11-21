@@ -21,10 +21,10 @@ class Music(commands.Cog):
 			return
 
 		await ctx.send('Connecting to voice channel...', delete_after=3)
-		await ctx.voice_clients.connect()
+		await discord.VoiceClient.connect()
 		await ctx.send('Playing ' + song)
-		await ctx.voice_clients.play(discord.FFmpegPCMAudio(song), after=lambda e: print('Player error: %s' % e) if e else None)
-		await ctx.voice_clients.disconnect()
+		await ctx.voice_client.play(discord.FFmpegPCMAudio(song), after=lambda e: print('Player error: %s' % e) if e else None)
+		await ctx.voice_client.disconnect()
 		await ctx.send('Disconnected from voice channel.')
 	#endregion
 
