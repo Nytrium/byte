@@ -4,7 +4,7 @@ from discord_slash import cog_ext
 
 guildIDs = [911595323363823676, 899316562014634075, 798236960677691432]
 
-class Music:
+class Music(commands.Cog):
 
 	def __init__(self, client):
 		self.client = client
