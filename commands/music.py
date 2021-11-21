@@ -19,12 +19,12 @@ class Music(commands.Cog):
 		if ctx.author.voice is None:
 			await ctx.send('You are not in a voice channel.')
 			return
-			
+
 		await ctx.send('Connecting to voice channel...', delete_after=3)
-		await ctx.voice_client.connect()
+		await ctx.voice_clients.connect()
 		await ctx.send('Playing ' + song)
-		await ctx.voice_client.play(discord.FFmpegPCMAudio(song), after=lambda e: print('Player error: %s' % e) if e else None)
-		await ctx.voice_client.disconnect()
+		await ctx.voice_clients.play(discord.FFmpegPCMAudio(song), after=lambda e: print('Player error: %s' % e) if e else None)
+		await ctx.voice_clients.disconnect()
 		await ctx.send('Disconnected from voice channel.')
 	#endregion
 
