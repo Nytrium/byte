@@ -19,8 +19,7 @@ class Music(commands.Cog):
 		if ctx.author.voice is None:
 			await ctx.send('You are not in a voice channel.')
 			return
-		if ctx.voice_client is not None:
-			await ctx.voice_client.disconnect()
+			
 		await ctx.send('Connecting to voice channel...', delete_after=3)
 		await ctx.voice_client.connect()
 		await ctx.send('Playing ' + song)
