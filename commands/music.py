@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from discord_slash import SlashCommand
+from discord_slash import cog_ext
 
 guildIDs = [911595323363823676, 899316562014634075, 798236960677691432]
 
@@ -14,7 +14,7 @@ class Music:
 		print('Music command loaded.')
 	
 	#region play command
-	@SlashCommand(name='play', description='Play a song.', guild_ids=guildIDs)
+	@cog_ext.cog_slash(name='play', description='Play a song.', guild_ids=guildIDs)
 	async def _play(self, ctx, *, song):
 		if not ctx.voice_client:
 			await ctx.invoke(self.client.get_cog('Voice')._join, ctx)
@@ -35,7 +35,7 @@ class Music:
 	#endregion
 
 	#region skip command
-	@SlashCommand(name='skip', description='Skip the current song.', guild_ids=guildIDs)
+	@cog_ext.cog_slash(name='skip', description='Skip the current song.', guild_ids=guildIDs)
 	async def _skip(self, ctx):
 		if not ctx.voice_client:
 			await ctx.invoke(self.client.get_cog('Voice')._join, ctx)
@@ -52,7 +52,7 @@ class Music:
 	#endregion	
 
 	#region stop command
-	@SlashCommand(name='stop', description='Stop the music.', guild_ids=guildIDs)
+	@cog_ext.cog_slash(name='stop', description='Stop the music.', guild_ids=guildIDs)
 	async def _stop(self, ctx):
 		if not ctx.voice_client:
 			await ctx.invoke(self.client.get_cog('Voice')._join, ctx)
@@ -69,7 +69,7 @@ class Music:
 	#endregion
 
 	#region pause command
-	@SlashCommand(name='pause', description='Pause the music.', guild_ids=guildIDs)
+	@cog_ext.cog_slash(name='pause', description='Pause the music.', guild_ids=guildIDs)
 	async def _pause(self, ctx):
 		if not ctx.voice_client:
 			await ctx.invoke(self.client.get_cog('Voice')._join, ctx)
@@ -86,7 +86,7 @@ class Music:
 	#endregion
 
 	#region resume command
-	@SlashCommand(name='resume', description='Resume the music.', guild_ids=guildIDs)
+	@cog_ext.cog_slash(name='resume', description='Resume the music.', guild_ids=guildIDs)
 	async def _resume(self, ctx):
 		if not ctx.voice_client:
 			await ctx.invoke(self.client.get_cog('Voice')._join, ctx)
