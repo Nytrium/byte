@@ -13,6 +13,11 @@ class Music(commands.Cog):
 	async def on_ready(self):
 		print('Music command loaded.')
 	
+	#region connect command
+	@cog_ext.cog_slash(name='connect', description='Connect to a voice channel.', guild_ids=guildIDs)
+	async def _connect(self, ctx, channel: discord.VoiceChannel):
+		await channel.connect()
+
 	#region play command
 	@cog_ext.cog_slash(name='play', description='Play a song.', guild_ids=guildIDs)
 	async def _play(self, ctx, *, song):
