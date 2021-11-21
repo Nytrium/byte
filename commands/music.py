@@ -67,3 +67,40 @@ class Music:
 		if isinstance(error, commands.MissingPermissions):
 			await ctx.send('You don\'t have permission to stop the music!')
 	#endregion
+
+	#region pause command
+	@SlashCommand(name='pause', description='Pause the music.', guild_ids=guildIDs)
+	async def _pause(self, ctx):
+		if not ctx.voice_client:
+			await ctx.invoke(self.client.get_cog('Voice')._join, ctx)
+		
+		if ctx.voice_client.is_playing():
+			ctx.voice_client.pause()
+			
+		await ctx.send('Paused the music!')
+	
+	@_pause.error
+	async def _pause_error(self, ctx, error):
+		if isinstance(error, commands.MissingPermissions):
+			await ctx.send('You don\'t have permission to pause the music!')
+	#endregion
+
+	#region resume command
+	@SlashCommand(name='resume', description='Resume the music.', guild_ids=guildIDs)
+	async def _resume(self, ctx):
+		if not ctx.voice_client:
+			await ctx.invoke(self.client.get_cog('Voice')._join, ctx)
+		
+		if ctx.voice_client.is_paused():
+			ctx.voice_client.resume()
+			
+		await ctx.send('Resumed the music!')
+
+	@_resume.error
+	async def _resume_error(self, ctx, error):
+		if isinstance(error, commands.MissingPermissions):
+			await ctx.send('You don\'t have permission to resume the music!')
+	#endregion
+
+def setup(client):
+	client.add_cog(Music(client))
