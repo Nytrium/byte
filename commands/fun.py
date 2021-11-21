@@ -83,8 +83,11 @@ class Fun(commands.Cog):
 	#region ship command
 	@cog_ext.cog_slash(name='ship', description='ship two people together', guild_ids=guildIDs)
 	async def _ship(self, ctx, user1: discord.Member, user2: discord.Member):
-		percent = random.randint(0, 100)
-		await ctx.send(f'{user1.mention} and {user2.mention} are {percent}% shippable!')
+		if user1.id == '783272839435255818' or user2.id == '783272839435255818':
+			await ctx.send(f'{user1.mention} and {user2.mention} are 0% shippable!\n<@783272839435255818> has a girlfriend, damn-it! >:(')
+		else:
+			percent = random.randint(0, 100)
+			await ctx.send(f'{user1.mention} and {user2.mention} are {percent}% shippable!')
 	#endregion
 	
 	#region dank command
