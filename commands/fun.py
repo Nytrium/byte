@@ -122,6 +122,7 @@ class Fun(commands.Cog):
 	async def _poke(self, ctx, user: discord.Member):
 		await ctx.send(f'{ctx.author.mention} poked {user.mention}!')
 	#endregion
+	
 
 def setup(client):
 	client.add_cog(Fun(client))
