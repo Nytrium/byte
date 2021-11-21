@@ -16,9 +16,9 @@ class Music(commands.Cog):
 	
 	#region connect command
 	@cog_ext.cog_slash(name='connect', description='Connect to a voice channel.', guild_ids=guildIDs)
-	async def _connect(self, ctx, channel: discord.VoiceChannel):
+	async def _connect(self, ctx):
 		await ctx.author.voice.channel.connect()
-		await ctx.send(f'Connected to {channel.name}.')
+		await ctx.send(f'Connected to {ctx.author.voice.channel.name}.')
 	#endregion
 
 	#region play command
@@ -51,7 +51,7 @@ class Music(commands.Cog):
 		
 		voice = ctx.voice_client
 		
-		player = voice.create_ffmpeg_player(url, after=lambda: print('done'))
+		player = voice.FFmpegAudio(url, after=lambda: print('done'))
 		player.start()
 		
 		await ctx.send(f'Playing {info["title"]}.')
