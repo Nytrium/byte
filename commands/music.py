@@ -17,18 +17,14 @@ class Music(commands.Cog):
 	@cog_ext.cog_slash(name='connect', description='Connect to a voice channel.', guild_ids=guildIDs)
 	async def _connect(self, ctx, channel: discord.VoiceChannel):
 		await channel.connect()
+		await ctx.send(f'Connected to {channel.name}.')
+	#endregion
 
 	#region play command
 	@cog_ext.cog_slash(name='play', description='Play a song.', guild_ids=guildIDs)
 	async def _play(self, ctx, *, song):
-		if ctx.author.voice is None:
-			await ctx.send('You are not in a voice channel.')
-			return
-
-		await ctx.send('Connecting to voice channel...', delete_after=3)
-		await discord.VoiceClient.connect()
-		await ctx.send('Playing ' + song)
 		await ctx.voice_client.play(discord.FFmpegPCMAudio(song), after=lambda e: print('Player error: %s' % e) if e else None)
+		await ctx.send('Playing ' + song)
 		await ctx.voice_client.disconnect()
 		await ctx.send('Disconnected from voice channel.')
 	#endregion
