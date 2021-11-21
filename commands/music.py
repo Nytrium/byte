@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 from discord_slash import cog_ext
 import youtube_dl
+import ffmpeg
 
 guildIDs = [911595323363823676, 899316562014634075, 798236960677691432]
 
@@ -49,7 +50,7 @@ class Music(commands.Cog):
 			await ctx.author.voice.channel.connect()
 			await ctx.send(f'Connected to {ctx.author.voice.channel.name}.')
 		
-		player = discord.FFmpegPCMAudio(url)
+		player = discord.FFmpegAudio(url)
 		player.start()
 		
 		await ctx.send(f'Playing {info["title"]}.')
