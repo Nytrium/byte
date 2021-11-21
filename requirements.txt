@@ -1,4 +1,3 @@
 discord.py[voice]
 discord-py-slash-command
 youtube-dl==2021.2.10
-ffmpeg

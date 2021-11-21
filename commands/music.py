@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from discord_slash import cog_ext
+import youtube_dl
 
 guildIDs = [911595323363823676, 899316562014634075, 798236960677691432]
 
@@ -23,10 +24,8 @@ class Music(commands.Cog):
 	#region play command
 	@cog_ext.cog_slash(name='play', description='Play a song.', guild_ids=guildIDs)
 	async def _play(self, ctx, *, song):
-		await discord.VoiceClient.play(discord.FFmpegPCMAudio(song), after=lambda e: print('Player error: %s' % e) if e else None)
-		await ctx.send('Playing ' + song)
-		await ctx.voice_client.disconnect()
-		await ctx.send('Disconnected from voice channel.')
+		self.queue = await ctx.voice_client.create_ytdl_player(song)
+		self.queue.start()
 	#endregion
 
 	#region stop command
