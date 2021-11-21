@@ -17,15 +17,44 @@ class Music(commands.Cog):
 	#region connect command
 	@cog_ext.cog_slash(name='connect', description='Connect to a voice channel.', guild_ids=guildIDs)
 	async def _connect(self, ctx, channel: discord.VoiceChannel):
-		await channel.connect()
+		await ctx.author.voice.channel.connect()
 		await ctx.send(f'Connected to {channel.name}.')
 	#endregion
 
 	#region play command
 	@cog_ext.cog_slash(name='play', description='Play a song.', guild_ids=guildIDs)
 	async def _play(self, ctx, *, song):
-		self.queue = await ctx.voice_client.create_ytdl_player(song)
-		self.queue.start()
+		await ctx.send(f'Searching for {song}...')
+		
+		ydl_opts = {
+			'format': 'bestaudio/best',
+			'quiet': True,
+			'outtmpl': '%(extractor)s-%(id)s-%(title)s.%(ext)s',
+			'postprocessors': [{
+				'key': 'FFmpegExtractAudio',
+				'preferredcodec': 'mp3',
+				'preferredquality': '192',
+			}],
+		}
+		
+		with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+			info = ydl.extract_info(f'ytsearch:{song}', download=False)
+		
+		if 'entries' in info:
+			info = info['entries'][0]
+		
+		url = info['url']
+		
+		if not ctx.voice_client:
+			await ctx.author.voice.channel.connect()
+			await ctx.send(f'Connected to {ctx.author.voice.channel.name}.')
+		
+		voice = ctx.voice_client
+		
+		player = voice.create_ffmpeg_player(url, after=lambda: print('done'))
+		player.start()
+		
+		await ctx.send(f'Playing {info["title"]}.')
 	#endregion
 
 	#region stop command
