@@ -78,9 +78,9 @@ class Moderation(commands.Cog):
 		embed.add_field(name="Username", value=f'{user.name}#{user.discriminator}', inline=True)
 		embed.add_field(name="Joined Server At", value=str(user.joined_at)[:-10], inline=True)
 		embed.add_field(name="Joined Discord At", value=str(user.created_at)[:-10], inline=True)
-		if ctx.author.id == 792162727907950652:
+		if user.id == 792162727907950652:
 			embed.add_field(name="Height", value="short", inline=False)
-		elif ctx.author.id == 711179491132571689:
+		elif user.id == 711179491132571689:
 			embed.add_field(name="Height", value="Luigi", inline=False)
 		else:
 			pass
