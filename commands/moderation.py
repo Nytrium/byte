@@ -78,11 +78,13 @@ class Moderation(commands.Cog):
 		embed.add_field(name="Joined Server At", value=str(user.joined_at)[:-10], inline=True)
 		embed.add_field(name="Joined Discord At", value=str(user.created_at)[:-10], inline=True)
 		if user.id == 792162727907950652:
-			embed.add_field(name="Height", value="short", inline=False)
+			embed.add_field(name="Height", value="short", inline=True)
 		elif user.id == 711179491132571689:
-			embed.add_field(name="Height", value="Luigi", inline=False)
+			embed.add_field(name="Height", value="Luigi", inline=True)
 		elif user.id == 429355349829615627:
-			embed.add_field(name="Height", value="super ultra mega tall", inline=False)
+			embed.add_field(name="Height", value="super ultra mega tall man person cool epic", inline=True)
+		elif user.id == 429083015025786880:
+			embed.add_field(name="Height", value="literal goomba", inline=True)
 		else:
 			pass
 		embed.set_footer(text="Command run by " + str(ctx.author))
