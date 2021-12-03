@@ -75,7 +75,7 @@ class Moderation(commands.Cog):
 	async def _userinfo(self, ctx, user: discord.Member):
 		embed=discord.Embed(title="User Info", description=user, color=0x5555ff)
 		embed.set_thumbnail(url=user.avatar_url)
-		embed.add_field(name="Joined Server At", value=str(user.joined_at)[:-10], inline=False)
+		embed.add_field(name="Joined Server At", value=str(user.joined_at)[:-10], inline=True)
 		embed.add_field(name="Joined Discord At", value=str(user.created_at)[:-10], inline=True)
 		if user.id == 792162727907950652:
 			embed.add_field(name="Height", value="short", inline=False)
