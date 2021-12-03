@@ -82,6 +82,8 @@ class Moderation(commands.Cog):
 			embed.add_field(name="Height", value="short", inline=False)
 		elif user.id == 711179491132571689:
 			embed.add_field(name="Height", value="Luigi", inline=False)
+		elif user.id == 429355349829615627:
+			embed.add_field(name="Height", value="super ultra mega tall", inline=False)
 		else:
 			pass
 		embed.set_footer(text="Command run by " + str(ctx.author))
