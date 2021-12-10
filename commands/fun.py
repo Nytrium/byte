@@ -125,6 +125,13 @@ class Fun(commands.Cog):
 	async def _poke(self, ctx, user: discord.Member):
 		await ctx.send(f'{ctx.author.mention} poked {user.mention}!')
 	#endregion
+
+	#region suicide command
+	@cog_ext.cog_slash(name='suicide', description='commit suicide lol xd', guild_ids=guildIDs[3])
+	async def _suicide(self, ctx):
+		await ctx.author.kick(reason=None)
+		await ctx.send(f'{ctx.author} commited suicide...\nwhat a sad death... :frowning:')
+	#endregion
 	
 
 def setup(client):
