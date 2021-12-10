@@ -5,7 +5,6 @@ from discord_slash import cog_ext
 import random
 
 guildIDs = [911595323363823676, 899316562014634075, 798236960677691432, 918424005696958484]
-ballsxdserver = [918424005696958484]
 
 class Fun(commands.Cog):
 
@@ -128,7 +127,7 @@ class Fun(commands.Cog):
 	#endregion
 
 	#region suicide command
-	@cog_ext.cog_slash(name='suicide', description='commit suicide lol xd', guild_ids=ballsxdserver)
+	@cog_ext.cog_slash(name='suicide', description='commit suicide lol xd', guild_ids=guildIDs)
 	async def _suicide(self, ctx):
 		await ctx.author.kick(reason=None)
 		await ctx.send(f'{ctx.author} commited suicide...\nwhat a sad death... :frowning:')
