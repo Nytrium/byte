@@ -77,9 +77,9 @@ class Moderation(commands.Cog):
 		embed.set_thumbnail(url=user.avatar_url)
 		embed.add_field(name="Joined Server At", value=str(user.joined_at)[:-10], inline=True)
 		embed.add_field(name="Joined Discord At", value=str(user.created_at)[:-10], inline=True)
-		if user.id == 792162727907950652 or 556506534432210974 or 635184987997732866:
+		if user.id == 792162727907950652:
 			embed.add_field(name="Height", value="short", inline=False)
-		elif user.id == 711179491132571689:
+		elif user.id == 711179491132571689 or 600069124810604544:
 			embed.add_field(name="Height", value="Luigi", inline=False)
 		elif user.id == 429355349829615627:
 			embed.add_field(name="Height", value="super ultra mega tall man person cool epic", inline=False)
