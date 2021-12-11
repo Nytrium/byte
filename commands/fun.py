@@ -89,12 +89,6 @@ class Fun(commands.Cog):
 			percent = random.randint(0, 100)
 			await ctx.send(f'{user1.mention} and {user2.mention} are {percent}% shippable!')
 	#endregion
-	
-	#region dank command
-	async def _dank(self, ctx, user: discord.Member):
-		percent = random.randint(0, 100)
-		await ctx.send(f'{user.mention} is {percent}% dank!')
-	#endregion
 
 	#region hug command
 	@cog_ext.cog_slash(name='hug', description='hug someone', guild_ids=guildIDs)
@@ -106,12 +100,6 @@ class Fun(commands.Cog):
 	@cog_ext.cog_slash(name='slap', description='slap someone', guild_ids=guildIDs)
 	async def _slap(self, ctx, user: discord.Member):
 		await ctx.send(f'{ctx.author.mention} slapped {user.mention}! Ouch!')
-	#endregion
-
-	#region pat command
-	@cog_ext.cog_slash(name='pat', description='pat someone', guild_ids=guildIDs)
-	async def _pat(self, ctx, user: discord.Member):
-		await ctx.send(f'{ctx.author.mention} patted {user.mention}!')
 	#endregion
 
 	#region kiss command

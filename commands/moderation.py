@@ -101,9 +101,14 @@ class Moderation(commands.Cog):
 		embed.add_field(name="8ball", value="Say something and find out the possibilities of that happening!", inline=False)
 		embed.add_field(name="thot", value="thot r8 machine", inline=False)
 		embed.add_field(name="simp", value="simp r8 machine", inline=False)
+		embed.add_field(name="kiss", value="kiss someone :kiss:", inline=False)
+		embed.add_field(name="slap", value="slap someone lol", inline=False)
+		embed.add_field(name="poke", value="poke someone", inline=False)
+		embed.add_field(name="ship", value="Ship 2 people together, how cute!", inline=False)
+		embed.add_field(name="suicide", value="I don't think this needs an explanation", inline=False)
 		embed.add_field(name="coinflip", value="Flip a coin!", inline=False)
 		embed.add_field(name="user-info", value="Get some information about a specific user.", inline=False)
-		embed.add_field(name="clear", value="Clear a number of messages in a channel (default: 1)", inline=False)
+		embed.add_field(name="clear", value="Clear a number of messages in a channel.", inline=False)
 		
 		await ctx.send(embed=embed)
 	#endregion
