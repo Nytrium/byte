@@ -4,7 +4,6 @@ from discord_slash import SlashCommand # pip install discord-py-slash-command
 import os
 
 client = commands.Bot(command_prefix='/', help_command=None, intents=discord.Intents.all())
-await client.change_presence(status=discord.Game(name='your mom xD'))
 slash = SlashCommand(client, sync_commands=True)
 
 @client.event
