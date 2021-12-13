@@ -53,7 +53,7 @@ class Fun(commands.Cog):
 				'Very doubtful.'
 				]
 
-		await ctx.send(random.choice(answers))
+		await ctx.send(f'>Q: {ctx.author}\nA: {random.choice(answers)}')
 	#endregion
 
 	#region coinflip command
