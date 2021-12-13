@@ -120,6 +120,12 @@ class Fun(commands.Cog):
 		await ctx.author.kick(reason=None)
 		await ctx.send(f'{ctx.author} commited suicide...\nwhat a sad death... :frowning:')
 	#endregion
+
+	#region sus command
+	@cog_ext.cog_slash(name='sus', description='when the imposter is sus', guild_ids=guildIDs)
+	async def _sus(self, ctx):
+		await ctx.send('when the imposter is sus ඞ')
+	#endregion
 	
 
 def setup(client):
