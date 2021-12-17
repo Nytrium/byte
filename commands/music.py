@@ -34,24 +34,24 @@ class Music(commands.Cog):
 		if not ctx.voice_client or not ctx.voice_client.is_connected():
 			await ctx.author.voice.channel.connect()
 
-		# load opus lib
-		if not discord.opus.is_loaded():
-			discord.opus.load_opus('libopus.so')
-
-		# search for the song on youtube, get info about the song and play it
+		# print information about the song to the chat and play the song using youtube_dl
 		ydl_opts = {
 			'format': 'bestaudio/best',
 			'postprocessors': [{
 				'key': 'FFmpegExtractAudio',
 				'preferredcodec': 'mp3',
-				'preferredquality': '192',
-			}],
+				'preferredquality': '192'
+			}]
 		}
 		with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-			info = ydl.extract_info(f'ytsearch:{song}', download=False)
-			song = info['entries'][0]
-			await ctx.voice_client.play(discord.FFmpegPCMAudio(song['url']), after=lambda e: print(f'{e}'))
-			await ctx.send(f'Now playing: {song["title"]}')
+			info = ydl.extract_info(song, download=False)
+			await ctx.send(f'Now playing: {info["title"]}')
+			source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(info['url']))
+			ctx.voice_client.play(source, after=lambda e: print('Player error: %s' % e) if e else None)
+
+		# disconnect from the voice channel if the song is finished playing
+		ctx.voice_client.stop()
+		await ctx.voice_client.disconnect()
 		
 	#endregion
 
