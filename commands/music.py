@@ -37,15 +37,20 @@ class Music(commands.Cog):
 		# create a ytdl object
 		ytdl = youtube_dl.YoutubeDL({'outtmpl': '%(id)s%(ext)s'})
 
-		# play the song using the ytdl object
-		with ytdl.YoutubeDL(['--quiet']) as ydl:
-			info = ydl.extract_info(song, download=False)
-			if 'entries' in info:
-				info = info['entries'][0]
-			filename = info['id'] + info['ext']
-			source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(f'{filename}'))
-			ctx.voice_client.play(source, after=lambda e: print('Player error: %s' % e) if e else None)
-			
+		# check if the song is a url or a search term
+		if 'www.youtube.com' in song or 'youtube.com' in song:
+			# if the song is a url, use the url
+			info = ytdl.extract_info(song, download=False)
+			song = info['url']
+		else:
+			# if the song is a search term, use the search term
+			info = ytdl.extract_info(f'ytsearch:{song}', download=False)
+			song = info['entries'][0]['url']
+		
+		# download and play the song using the information and youtube_dl
+		player = await ctx.voice_client.create_ytdl_player(song)
+		player.start()
+		await ctx.send(f'Now playing {player.title}.')
 		
 	#endregion
 
