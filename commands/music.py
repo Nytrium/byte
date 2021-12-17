@@ -25,30 +25,30 @@ class Music(commands.Cog):
 	#region play command
 	@cog_ext.cog_slash(name='play', description='Play a song.', guild_ids=guildIDs)
 	async def _play(self, ctx, *, song):
-		# start playing a song in the current voice channel using youtube_dl
-		# if the user is in a voice channel, connect to the voice channel
-		if ctx.author.voice:
-			await ctx.author.voice.channel.connect()
-		# if the user is not in a voice channel, send an error message
-		else:
+		# check if the user is in a voice channel, if not, return an error message
+		if not ctx.author.voice or not ctx.author.voice.channel:
 			await ctx.send('You are not in a voice channel.')
 			return
 
-		# create a ytdl object
-		ytdl = youtube_dl.YoutubeDL({'outtmpl': '%(id)s%(ext)s'})
-		# get the info of the song
-		info = ytdl.extract_info(song, download=False)
-		# get the url of the song
-		url = info['url']
-		# get the title of the song
-		title = info['title']
-		# get the duration of the song
-		duration = info['duration']
+		# check if the user is in a voice channel and if the bot isn't already connected to the voice channel, connect
+		if not ctx.voice_client or not ctx.voice_client.is_connected():
+			await ctx.author.voice.channel.connect()
+
+		# search for the song on youtube, get info about the song and play it
+		ydl_opts = {
+			'format': 'bestaudio/best',
+			'postprocessors': [{
+				'key': 'FFmpegExtractAudio',
+				'preferredcodec': 'mp3',
+				'preferredquality': '192',
+			}],
+		}
+		with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+			info = ydl.extract_info(f'ytsearch:{song}', download=False)
+			song = info['entries'][0]
+			await ctx.voice_client.play(discord.FFmpegPCMAudio(song['url']), after=lambda e: print(f'{e}'))
+			await ctx.send(f'Now playing: {song["title"]}')
 		
-		# play the song in the voice channel and send a message
-		player = await ctx.author.voice.channel.connect()
-		player.play(discord.FFmpegPCMAudio(url))
-		await ctx.send(f'Now playing: {title}\nSong Length: {duration}')
 	#endregion
 
 	#region disconnect command
