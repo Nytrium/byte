@@ -34,24 +34,23 @@ class Music(commands.Cog):
 		if not ctx.voice_client or not ctx.voice_client.is_connected():
 			await ctx.author.voice.channel.connect()
 
-		# print information about the song to the chat and play the song using youtube_dl
-		ydl_opts = {
-			'format': 'bestaudio/best',
-			'postprocessors': [{
-				'key': 'FFmpegExtractAudio',
-				'preferredcodec': 'mp3',
-				'preferredquality': '192'
-			}]
-		}
-		with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-			info = ydl.extract_info(song, download=False)
-			await ctx.send(f'Now playing: {info["title"]}')
-			source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(info['url']))
-			ctx.voice_client.play(source, after=lambda e: print('Player error: %s' % e) if e else None)
+		# create a ytdl object
+		ytdl = youtube_dl.YoutubeDL({'outtmpl': '%(id)s%(ext)s'})
 
-		# disconnect from the voice channel if the song is finished playing
-		ctx.voice_client.stop()
-		await ctx.voice_client.disconnect()
+		# check if the song is a url or a search term
+		if 'www.youtube.com' in song or 'youtube.com' in song:
+			# if the song is a url, download it
+			info = ytdl.extract_info(song, download=False)
+			song = info['url']
+		else:
+			# if the song is a search term, search it
+			info = ytdl.extract_info(f'ytsearch:{song}', download=False)
+			song = info['entries'][0]['url']
+		
+		# play the song
+		source = discord.FFmpegPCMAudio(song)
+		ctx.voice_client.play(source)
+		await ctx.send(f'Now playing {info["title"]} ({info["duration"]}).\nRequested by {ctx.author.mention}.')
 		
 	#endregion
 
