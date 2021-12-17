@@ -37,14 +37,15 @@ class Music(commands.Cog):
 		# create a ytdl object
 		ytdl = youtube_dl.YoutubeDL({'outtmpl': '%(id)s%(ext)s'})
 
-		# download and play the song
-		try:
-			info = ytdl.extract_info(song, download=False)
-			song = ytdl.prepare_filename(info)
-			await ctx.voice_client.play(discord.FFmpegPCMAudio(song), after=lambda e: print('done', e))
-		except Exception as e:
-			await ctx.send(f'An error has occured: {e}')
-			return
+		# play the song using the ytdl object
+		with ytdl.YoutubeDL(['--quiet']) as ydl:
+			info = ydl.extract_info(song, download=False)
+			if 'entries' in info:
+				info = info['entries'][0]
+			filename = info['id'] + info['ext']
+			source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(f'{filename}'))
+			ctx.voice_client.play(source, after=lambda e: print('Player error: %s' % e) if e else None)
+			
 		
 	#endregion
 
