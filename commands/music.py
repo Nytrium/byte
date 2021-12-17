@@ -38,8 +38,8 @@ class Music(commands.Cog):
 		ytdl = youtube_dl.YoutubeDL({'outtmpl': '%(id)s%(ext)s'})
 
 		# check if the song is a url and send an error message if it is not
-		if not ytdl.url_is_valid(song):
-			await ctx.send('Invalid URL.')
+		if not song.startswith('https://') or not song.startswith('youtube.com/'):
+			await ctx.send('Searching is not supported at the moment!')
 			return
 		
 		# if the song is a url, download it and play it and send some informaion about it
