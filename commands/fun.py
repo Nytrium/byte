@@ -53,7 +53,7 @@ class Fun(commands.Cog):
 				'Very doubtful.'
 				]
 
-		await ctx.send(random.choice(answers))
+		await ctx.send(f'> Q: {ctx.author}\n> A: {random.choice(answers)}')
 	#endregion
 
 	#region coinflip command
@@ -119,6 +119,12 @@ class Fun(commands.Cog):
 	async def _suicide(self, ctx):
 		await ctx.author.kick(reason=None)
 		await ctx.send(f'{ctx.author} commited suicide...\nwhat a sad death... :frowning:')
+	#endregion
+
+	#region sus command
+	@cog_ext.cog_slash(name='sus', description='when the imposter is sus', guild_ids=guildIDs)
+	async def _sus(self, ctx):
+		await ctx.send('when the imposter is sus ඞ')
 	#endregion
 	
 
