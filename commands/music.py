@@ -37,10 +37,10 @@ class Music(commands.Cog):
 		# create a ytdl object
 		ytdl = youtube_dl.YoutubeDL({'outtmpl': '%(id)s%(ext)s'})
 
-		# check if the song is a url and send an error message if it is not
-		if not song.startswith('https://') or not song.startswith('youtube.com/'):
-			await ctx.send('Searching is not supported at the moment!')
-			return
+		# check if the song is a url or a search term and download the song if it is a url
+		if 'www.youtube.com' in song or 'youtube.com' in song:
+			info = ytdl.extract_info(song, download=False)
+			song = info['url']
 		
 		# if the song is a url, download it and play it and send some informaion about it
 		info = ytdl.extract_info(song, download=False)
