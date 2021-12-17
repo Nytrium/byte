@@ -71,5 +71,15 @@ class Music(commands.Cog):
 		await ctx.send('Stopped playing.')
 	#endregion
 
+	#region leave command
+	@cog_ext.cog_slash(name='leave', description='Leave the voice channel.', guild_ids=guildIDs)
+	async def _leave(self, ctx):
+		if ctx.voice_client is None:
+			await ctx.send('I am not connected to a voice channel.')
+			return
+		await ctx.voice_client.disconnect()
+		await ctx.send('Left the voice channel.')
+	#endregion
+
 def setup(client):
 	client.add_cog(Music(client))
