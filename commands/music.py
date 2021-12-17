@@ -25,35 +25,40 @@ class Music(commands.Cog):
 	#region play command
 	@cog_ext.cog_slash(name='play', description='Play a song.', guild_ids=guildIDs)
 	async def _play(self, ctx, *, song):
-		await ctx.send(f'Searching for {song}...')
-		
-		ydl_opts = {
-			'format': 'bestaudio/best',
-			'quiet': True,
-			'outtmpl': '%(extractor)s-%(id)s-%(title)s.%(ext)s',
-			'postprocessors': [{
-				'key': 'FFmpegExtractAudio',
-				'preferredcodec': 'mp3',
-				'preferredquality': '192',
-			}],
-		}
-		
-		with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-			info = ydl.extract_info(f'ytsearch:{song}', download=False)
-		
-		if 'entries' in info:
-			info = info['entries'][0]
-		
-		url = info['url']
-		
-		if not ctx.voice_client:
+		# start playing a song in the current voice channel using youtube_dl
+		# if the user is in a voice channel, connect to the voice channel
+		if ctx.author.voice:
 			await ctx.author.voice.channel.connect()
-			await ctx.send(f'Connected to {ctx.author.voice.channel.name}.')
+		# if the user is not in a voice channel, send an error message
+		else:
+			await ctx.send('You are not in a voice channel.')
+			return
+
+		# create a ytdl object
+		ytdl = youtube_dl.YoutubeDL({'outtmpl': '%(id)s%(ext)s'})
+		# get the info of the song
+		info = ytdl.extract_info(song, download=False)
+		# get the url of the song
+		url = info['url']
+		# get the title of the song
+		title = info['title']
+		# get the duration of the song
+		duration = info['duration']
 		
-		player = discord.FFmpegAudio(url)
-		player.start()
-		
-		await ctx.send(f'Playing {info["title"]}.')
+		# play the song in the voice channel and send a message
+		player = await ctx.author.voice.channel.connect()
+		player.play(discord.FFmpegPCMAudio(url))
+		await ctx.send(f'Now playing: {title}\nSong Length: {duration}')
+	#endregion
+
+	#region disconnect command
+	@cog_ext.cog_slash(name='disconnect', description='Disconnect from the voice channel.', guild_ids=guildIDs)
+	async def _disconnect(self, ctx):
+		if ctx.voice_client:
+			await ctx.voice_client.disconnect()
+			await ctx.send(f'Disconnected from {ctx.author.voice.channel.name}.')
+		else:
+			await ctx.send('I am not connected to a voice channel.')
 	#endregion
 
 	#region stop command
@@ -68,4 +73,3 @@ class Music(commands.Cog):
 
 def setup(client):
 	client.add_cog(Music(client))
-
