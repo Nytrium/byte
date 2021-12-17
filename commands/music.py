@@ -40,14 +40,15 @@ class Music(commands.Cog):
 		# check if the song is a url or a search term and download the song if it is a url
 		if 'www.youtube.com' in song or 'youtube.com' in song:
 			info = ytdl.extract_info(song, download=False)
-			song = info['url']
+			songID = info['id']
+			url = f'https://www.youtube.com/watch?v={songID}'
 		
 		# if the song is a url, download it and play it and send some informaion about it
-		info = ytdl.extract_info(song, download=False)
+		info = ytdl.extract_info(url, download=False)
 		if 'entries' in info:
 			info = info['entries'][0]
 		await ctx.send(f'Playing {info["title"]} ({info["duration"]}).\nRequested by {ctx.author.name}.')
-		ctx.voice_client.play(discord.FFmpegPCMAudio(info['url']), after=lambda e: print('done', e))
+		ctx.voice_client.play(discord.FFmpegPCMAudio(url), after=lambda e: print('done', e))
 		
 	#endregion
 
