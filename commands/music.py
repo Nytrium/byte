@@ -34,6 +34,10 @@ class Music(commands.Cog):
 		if not ctx.voice_client or not ctx.voice_client.is_connected():
 			await ctx.author.voice.channel.connect()
 
+		# load opus lib
+		if not discord.opus.is_loaded():
+			discord.opus.load_opus('libopus.so')
+
 		# search for the song on youtube, get info about the song and play it
 		ydl_opts = {
 			'format': 'bestaudio/best',
