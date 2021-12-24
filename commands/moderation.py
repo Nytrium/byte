@@ -58,7 +58,7 @@ class Moderation(commands.Cog):
 	#region nick command
 	@commands.has_permissions(manage_nicknames=True)
 	@commands.command(name='nick')
-	async def _nick(self, ctx, user: discord.Member, *, nickname):
+	async def _nick(self, ctx, user:discord.Member=discord.Message.author, *, nickname):
 		await user.edit(nick=nickname)
 		await ctx.send('Successfully changed nickname for ' + str(user.mention))
 
@@ -125,29 +125,13 @@ class Moderation(commands.Cog):
 			await ctx.send('You don\'t have permission to mute members!')
 	#endregion
  
-	#region unmute command
-	@commands.has_permissions(manage_roles=True)
-	@commands.command(name='unmute')
-	async def _unmute(self, ctx, member: discord.Member):
-		if member == ctx.author:
-			await ctx.send('You can\'t unmute yourself!')
-		else:
-			role = discord.utils.get(ctx.guild.roles, name='Muted')
-			await member.remove_roles(role)
-			await ctx.send('Successfully unmuted ' + str(member.mention))
-   
-	@_unmute.error
-	async def unmute_error(self, ctx, error):
-		if isinstance(error, commands.MissingPermissions):
-			await ctx.send('You don\'t have permission to unmute members!')
-	#endregion
- 
 	#region nuke command
 	@commands.has_permissions(manage_messages=True, manage_channels=True)
 	@commands.command(name='nuke')
 	async def _nuke(self, ctx, channel=discord.TextChannel):
-		channel.clone()
-		channel.delete()
+		await channel.clone()
+		await channel.delete()
+		await ctx.send(f'Successfully nuked {channel.mention}.', delete_after=3)
 	
 	@_nuke.error
 	async def nuke_error(self, ctx, error):
