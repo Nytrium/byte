@@ -100,19 +100,24 @@ class Moderation(commands.Cog):
 	@commands.command(name='help')
 	async def _help(self, ctx):
 		embed=discord.Embed(title="Help", description="List of Commands", color=0x55ff55)
-		embed.add_field(name="help", value="Bring up this embed.", inline=False)
-		embed.add_field(name="say", value="Make the bot say something!", inline=False)
-		embed.add_field(name="8ball", value="Say something and find out the possibilities of that happening!", inline=False)
-		embed.add_field(name="thot", value="thot r8 machine", inline=False)
-		embed.add_field(name="simp", value="simp r8 machine", inline=False)
-		embed.add_field(name="kiss", value="kiss someone :kiss:", inline=False)
-		embed.add_field(name="slap", value="slap someone lol", inline=False)
-		embed.add_field(name="poke", value="poke someone", inline=False)
-		embed.add_field(name="ship", value="Ship 2 people together, how cute!", inline=False)
-		embed.add_field(name="suicide", value="I don't think this needs an explanation", inline=False)
-		embed.add_field(name="coinflip", value="Flip a coin!", inline=False)
-		embed.add_field(name="user-info", value="Get some information about a specific user.", inline=False)
-		embed.add_field(name="clear", value="Clear a number of messages in a channel.", inline=False)
+		embed.add_field(name="help", value="Bring up this embed.", inline=False)												# Help
+		embed.add_field(name="say", value="Make the bot say something!", inline=False)											# Say
+		embed.add_field(name="8ball", value="Say something and find out the possibilities of that happening!", inline=False)	# 8ball
+		embed.add_field(name="thot", value="thot r8 machine", inline=False)														# Thot
+		embed.add_field(name="simp", value="simp r8 machine", inline=False)														# Simp
+		embed.add_field(name="kiss", value="kiss someone :kiss:", inline=False)													# Kiss
+		embed.add_field(name="slap", value="slap someone lol", inline=False)													# Slap
+		embed.add_field(name="poke", value="poke someone", inline=False)														# Poke
+		embed.add_field(name="ship", value="Ship 2 people together, how cute!", inline=False)									# Ship
+		embed.add_field(name="suicide", value="I don't think this needs an explanation", inline=False)							# Suicide
+		embed.add_field(name="coinflip", value="Flip a coin!", inline=False)													# Coinflip
+		embed.add_field(name="nick", value="Change a user's nickname.", inline=False)											# Nick
+		embed.add_field(name="user-info", value="Get some information about a specific user.", inline=False)					# User-info
+		embed.add_field(name="purge", value="Clear a number of messages in a channel.", inline=False)							# Purge
+		embed.add_field(name="nuke", value="Nuke the channel.", inline=False)													# Nuke
+		embed.add_field(name="kick", value="Kick a user from the server.", inline=False)										# Kick
+		embed.add_field(name="ban", value="Ban a user from the server.", inline=False)											# Ban
+
 		
 		await ctx.send(embed=embed)
 	#endregion
