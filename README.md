@@ -10,3 +10,7 @@ Once [Hikari](https://www.hikari-py.dev/) get fully released, I will be moving t
 > -Kuba, Jason didn't write this wtf u mean
 
 ![image](https://user-images.githubusercontent.com/66474423/147354731-543776ec-3cbe-4cd7-ae0c-c7dc612ceee8.png)
+
+> fuck you jason
+>
+>-kuba
