@@ -1,6 +1,9 @@
 import discord # pip install discord.py
 from discord.ext import commands # pip install discord.py
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 client = commands.Bot(command_prefix='$', help_command=None, intents=discord.Intents.all())
 
