@@ -26,4 +26,3 @@ for fileName in os.listdir('./commands'):
         client.load_extension(f'commands.{fileName[:-3]}')
 
 client.run(os.environ['TOKEN'])
-# poonxal was here
