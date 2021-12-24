@@ -4,3 +4,6 @@ Byte is an Open-Source Discord bot made in Python, meant to replace MEE6 and oth
 
 ## Note:
 Once [Hikari](https://www.hikari-py.dev/) get fully released, I will be moving the bot to that wrapper as soon as possible.
+
+> Once I get off my lazy ass and study JavaScript, I will be moving the bot to Discord.js as soon as possible.
+> - Kuba, Jason didn't write this wtf u mean
