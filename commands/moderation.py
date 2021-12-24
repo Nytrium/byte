@@ -55,20 +55,6 @@ class Moderation(commands.Cog):
 			await ctx.send('You don\'t have permission to clear messages!')
 	#endregion
 
-	#region nuke command
-	@commands.has_permissions(administrator=True)
-	@commands.command(name='nuke')
-	async def _nuke(self, ctx):
-		await ctx.channel.clone()
-		await ctx.channel.delete()
-		await ctx.send('Successfully nuked the channel!', delete_after=3)
-	
-	@_nuke.error
-	async def nuke_error(self, ctx, error):
-		if isinstance(error, commands.MissingPermissions):
-			await ctx.send('You don\'t have permission to nuke the channel!', delete_after=3)
-	#endregion
-
 	#region nick command
 	@commands.has_permissions(manage_nicknames=True)
 	@commands.command(name='nick')
