@@ -15,14 +15,15 @@ class Moderation(commands.Cog):
 	@commands.command(name='kick')
 	async def _kick(self, ctx, member: discord.Member, *, reason=None):
 		if member == ctx.author:
-			await ctx.send('You can\'t kick yourself!')
+			await ctx.send('You can\'t kick yourself!', delete_after=3)
 		else:
 			await member.kick(reason=reason)
+			await ctx.send(f'{member.mention} was kicked for {reason}.', delete_after=3)
    
 	@_kick.error
 	async def kick_error(self, ctx, error):
 		if isinstance(error, commands.MissingPermissions):
-			await ctx.send('You don\'t have permission to kick members!')
+			await ctx.send('You don\'t have permission to kick members!', delete_after=3)
 	#endregion
 
 	#region ban command
@@ -33,11 +34,12 @@ class Moderation(commands.Cog):
 			await ctx.send('You can\'t ban yourself!')
 		else:
 			await member.ban(reason=reason)
+			await ctx.send(f'{member.mention} was banned for {reason}.', delete_after=3)
 
 	@_ban.error
 	async def ban_error(self, ctx, error):
 		if isinstance(error, commands.MissingPermissions):
-			await ctx.send('You don\'t have permission to ban members!')
+			await ctx.send('You don\'t have permission to ban members!', delete_after=3)
 	#endregion
 
 	#region purge command
@@ -51,6 +53,20 @@ class Moderation(commands.Cog):
 	async def purge_error(self, ctx, error):
 		if isinstance(error, commands.MissingPermissions):
 			await ctx.send('You don\'t have permission to clear messages!')
+	#endregion
+
+	#region nuke command
+	@commands.has_permissions(administrator=True)
+	@commands.command(name='nuke')
+	async def _nuke(self, ctx):
+		await ctx.channel.clone()
+		await ctx.channel.delete()
+		await ctx.send('Successfully nuked the channel!', delete_after=3)
+	
+	@_nuke.error
+	async def nuke_error(self, ctx, error):
+		if isinstance(error, commands.MissingPermissions):
+			await ctx.send('You don\'t have permission to nuke the channel!', delete_after=3)
 	#endregion
 
 	#region nick command
@@ -83,7 +99,7 @@ class Moderation(commands.Cog):
 	@commands.has_permissions()
 	@commands.command(name='help')
 	async def _help(self, ctx):
-		embed=discord.Embed(title="Help", description="List of Commands", color=0x00ff00)
+		embed=discord.Embed(title="Help", description="List of Commands", color=0x55ff55)
 		embed.add_field(name="help", value="Bring up this embed.", inline=False)
 		embed.add_field(name="say", value="Make the bot say something!", inline=False)
 		embed.add_field(name="8ball", value="Say something and find out the possibilities of that happening!", inline=False)
