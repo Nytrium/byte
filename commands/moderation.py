@@ -128,7 +128,7 @@ class Moderation(commands.Cog):
 	#region nuke command
 	@commands.has_permissions(manage_messages=True, manage_channels=True)
 	@commands.command(name='nuke')
-	async def _nuke(self, ctx, channel=discord.TextChannel):
+	async def _nuke(self, ctx, channel:discord.TextChannel=discord.Message.channel):
 		await channel.clone()
 		await channel.delete()
 		await ctx.send(f'Successfully nuked {channel.mention}.', delete_after=3)
