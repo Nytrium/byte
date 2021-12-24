@@ -1,8 +1,5 @@
 import discord
 from discord.ext import commands
-from discord_slash import cog_ext
-
-guildIDs = [798236960677691432, 918424005696958484, 899316562014634075, 922998853827964978]
 
 class Moderation(commands.Cog):
 
@@ -15,7 +12,7 @@ class Moderation(commands.Cog):
 	
 	#region kick command
 	@commands.has_permissions(kick_members=True)
-	@cog_ext.cog_slash(name='kick', description='Kick a server member.', guild_ids=guildIDs)
+	@commands.command(name='kick')
 	async def _kick(self, ctx, member: discord.Member, *, reason=None):
 		if member == ctx.author:
 			await ctx.send('You can\'t kick yourself!')
@@ -30,7 +27,7 @@ class Moderation(commands.Cog):
 
 	#region ban command
 	@commands.has_permissions(ban_members=True)
-	@cog_ext.cog_slash(name='ban', description='Ban a server member.', guild_ids=guildIDs)
+	@commands.command(name='ban')
 	async def _ban(self, ctx, member: discord.Member, *, reason=None):
 		if member == ctx.author:
 			await ctx.send('You can\'t ban yourself!')
@@ -45,7 +42,7 @@ class Moderation(commands.Cog):
 
 	#region purge command
 	@commands.has_permissions(manage_messages=True)
-	@cog_ext.cog_slash(name='clear', description='Clear an amount of messages from the current channel.', guild_ids=guildIDs)
+	@commands.command(name='clear')
 	async def _purge(self, ctx, amount=1):
 		await ctx.channel.purge(limit=int(amount)+1)
 		await ctx.send(f'Successfully purged {amount} messages!', delete_after=2)
@@ -58,7 +55,7 @@ class Moderation(commands.Cog):
 
 	#region nick command
 	@commands.has_permissions(manage_nicknames=True)
-	@cog_ext.cog_slash(name='nick', description='Give a server member a new nickname.', guild_ids=guildIDs)
+	@commands.command(name='nick')
 	async def _nick(self, ctx, user: discord.Member, *, nickname):
 		await user.edit(nick=nickname)
 		await ctx.send('Successfully changed nickname for ' + str(user.mention))
@@ -71,7 +68,7 @@ class Moderation(commands.Cog):
 
 	#region user-info command
 	@commands.has_permissions()
-	@cog_ext.cog_slash(name='user-info', description='Get information on a server member.', guild_ids=guildIDs)
+	@commands.command(name='user-info')
 	async def _userinfo(self, ctx, user: discord.Member):
 		embed=discord.Embed(title="User Info", description=user, color=0x5555ff)
 		embed.set_thumbnail(url=user.avatar_url)
@@ -84,7 +81,7 @@ class Moderation(commands.Cog):
 
 	#region help command
 	@commands.has_permissions()
-	@cog_ext.cog_slash(name='help', description='Get a list of bot commands.', guild_ids=guildIDs)
+	@commands.command(name='help')
 	async def _help(self, ctx):
 		embed=discord.Embed(title="Help", description="List of Commands", color=0x00ff00)
 		embed.add_field(name="help", value="Bring up this embed.", inline=False)
@@ -106,7 +103,7 @@ class Moderation(commands.Cog):
  
 	#region mute command
 	@commands.has_permissions(manage_roles=True)
-	@cog_ext.cog_slash(name='mute', description='Mute a server member.', guild_ids=guildIDs)
+	@commands.command(name='mute')
 	async def _mute(self, ctx, member: discord.Member):
 		if member == ctx.author:
 			await ctx.send('You can\'t mute yourself!')
@@ -123,7 +120,7 @@ class Moderation(commands.Cog):
  
 	#region unmute command
 	@commands.has_permissions(manage_roles=True)
-	@cog_ext.cog_slash(name='unmute', description='Unmute a server member.', guild_ids=guildIDs)
+	@commands.command(name='unmute')
 	async def _unmute(self, ctx, member: discord.Member):
 		if member == ctx.author:
 			await ctx.send('You can\'t unmute yourself!')
@@ -140,7 +137,7 @@ class Moderation(commands.Cog):
  
 	#region nuke command
 	@commands.has_permissions(manage_messages=True, manage_channels=True)
-	@cog_ext.cog_slash(name='nuke', description='Purge a whole channel worth of messages.', guild_ids=guildIDs)
+	@commands.command(name='nuke')
 	async def _nuke(self, ctx, channel=discord.TextChannel):
 		channel.clone()
 		channel.delete()

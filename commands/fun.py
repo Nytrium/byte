@@ -1,10 +1,7 @@
 import discord
 from discord import message
 from discord.ext import commands
-from discord_slash import cog_ext
 import random
-
-guildIDs = [798236960677691432, 918424005696958484, 899316562014634075, 922998853827964978]
 
 class Fun(commands.Cog):
 
@@ -16,19 +13,19 @@ class Fun(commands.Cog):
 		print('Fun commands loaded.')
 
 	#region say command
-	@cog_ext.cog_slash(name='say', description='Make the bot say something!', guild_ids=guildIDs)
+	@commands.command(name='say')
 	async def _say(self, ctx, *, message):
 		await ctx.send(f'> {ctx.author.mention} says {message}')
 	#endregion
 
 	#region quote command
-	@cog_ext.cog_slash(name='quote', description='Quote a user!', guild_ids=guildIDs)
+	@commands.command(name='quote')
 	async def _quote(self, ctx, user: discord.Member, *, message):
 		await ctx.send(f'> {message}\n{user.mention}')
 	#endregion
 
 	#region 8ball command
-	@cog_ext.cog_slash(name='8ball', description='Ask a question and see the possibilities of it happening!', guild_ids=guildIDs)
+	@commands.command(name='8ball')
 	async def _8ball(self, ctx, *, question):
 		answers = [
 				'It is certain.',
@@ -57,7 +54,7 @@ class Fun(commands.Cog):
 	#endregion
 
 	#region coinflip command
-	@cog_ext.cog_slash(name='coinflip', description='Flip a coin!', guild_ids=guildIDs)
+	@commands.command(name='coinflip')
 	async def _coinflip(self, ctx):
 		flip = random.randint(0,1)
 		if flip:
@@ -67,21 +64,21 @@ class Fun(commands.Cog):
 	#endregion
 
 	#region simp command
-	@cog_ext.cog_slash(name='simp', description='simp r8 machine', guild_ids=guildIDs)
+	@commands.command(name='simp')
 	async def _simp(self, ctx, user: discord.Member):
 		percent = random.randint(0, 100)
 		await ctx.send(f'{user.mention} is {percent}% simp!')
 	#endregion
 
 	#region thot command
-	@cog_ext.cog_slash(name='thot', description='thotties do be thotting', guild_ids=guildIDs)
+	@commands.command(name='thot')
 	async def _thot(self, ctx, user: discord.Member):
 		percent = random.randint(0, 100)
 		await ctx.send(f'{user.mention} is {percent}% thot!')
 	#endregion 
 	
 	#region ship command
-	@cog_ext.cog_slash(name='ship', description='ship two people together', guild_ids=guildIDs)
+	@commands.command(name='ship')
 	async def _ship(self, ctx, user1: discord.Member, user2: discord.Member):
 		if user1.id == '783272839435255818' or user2.id == '783272839435255818':
 			await ctx.send(f'{user1.mention} and {user2.mention} are 0% shippable!\n<@783272839435255818> has a girlfriend, damn-it! >:(')
@@ -91,38 +88,38 @@ class Fun(commands.Cog):
 	#endregion
 
 	#region hug command
-	@cog_ext.cog_slash(name='hug', description='hug someone', guild_ids=guildIDs)
+	@commands.command(name='hug')
 	async def _hug(self, ctx, user: discord.Member):
 		await ctx.send(f'{ctx.author.mention} hugged {user.mention}! How cute!')
 	#endregion
 
 	#region slap command
-	@cog_ext.cog_slash(name='slap', description='slap someone', guild_ids=guildIDs)
+	@commands.command(name='slap')
 	async def _slap(self, ctx, user: discord.Member):
 		await ctx.send(f'{ctx.author.mention} slapped {user.mention}! Ouch!')
 	#endregion
 
 	#region kiss command
-	@cog_ext.cog_slash(name='kiss', description='kiss someone', guild_ids=guildIDs)
+	@commands.command(name='kiss')
 	async def _kiss(self, ctx, user: discord.Member):
 		await ctx.send(f'{ctx.author.mention} kissed {user.mention}! Awww')
 	#endregion
 
 	#region poke command
-	@cog_ext.cog_slash(name='poke', description='poke someone', guild_ids=guildIDs)
+	@commands.command(name='poke')
 	async def _poke(self, ctx, user: discord.Member):
 		await ctx.send(f'{ctx.author.mention} poked {user.mention}!')
 	#endregion
 
 	#region suicide command
-	@cog_ext.cog_slash(name='suicide', description='commit suicide lol xd', guild_ids=guildIDs)
+	@commands.command(name='suicide')
 	async def _suicide(self, ctx):
 		await ctx.author.kick(reason=None)
 		await ctx.send(f'{ctx.author} commited suicide...\nwhat a sad death... :frowning:')
 	#endregion
 
 	#region sus command
-	@cog_ext.cog_slash(name='sus', description='when the imposter is sus', guild_ids=guildIDs)
+	@commands.command(name='sus')
 	async def _sus(self, ctx):
 		await ctx.send('when the imposter is sus ඞ')
 	#endregion

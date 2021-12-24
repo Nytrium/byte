@@ -3,8 +3,7 @@ from discord.ext import commands # pip install discord.py
 from discord_slash import SlashCommand # pip install discord-py-slash-command
 import os
 
-client = commands.Bot(command_prefix='/', help_command=None, intents=discord.Intents.all())
-client.change_presence(status=discord.Game(name="your mom"))
+client = commands.Bot(command_prefix='$', help_command=None, intents=discord.Intents.all())
 slash = SlashCommand(client, sync_commands=True)
 
 @client.event
