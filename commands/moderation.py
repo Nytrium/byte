@@ -131,7 +131,6 @@ class Moderation(commands.Cog):
 	async def _nuke(self, ctx, channel:discord.TextChannel=discord.Message.channel):
 		await channel.clone()
 		await channel.delete()
-		await ctx.send(f'Successfully nuked {channel.mention}.', delete_after=3)
 	
 	@_nuke.error
 	async def nuke_error(self, ctx, error):
